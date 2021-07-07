@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/rodri/Documents/imt342_IN_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rodri/Documents/imt342_IN_ws/install -G Unix Makefiles

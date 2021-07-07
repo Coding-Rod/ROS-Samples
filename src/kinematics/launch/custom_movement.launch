@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find kinematics)/launch/load_kr6r900sixx.launch" />
+  <node name="joint_states_publisher" pkg="kinematics" type="joinstate_publisher.py">
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kinematics)urdf.rviz"  required="true" />
+</launch>

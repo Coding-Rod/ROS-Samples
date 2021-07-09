@@ -8,11 +8,11 @@
 |------------|-----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | roscore    | This starts the Master                                                                                                | $ roscore                                                                                    |
 | rosrun     | This runs an executable program and creates nodes                                                                     | $ rosrun [package name] [executable name]                                                    |
-| rosnode    | This shows information about nodes and lists the active nodes                                                         | $ rosnode info [node name] $ rosnode <subcommand> Subcommand: list                           |
-| rostopic   | This shows information about ROS topics                                                                               | $ rostopic <subcommand> <topic name> Subcommands: echo, info, and type                       |
-| rosmsg     | This shows information about the message types                                                                        | $ rosmsg <subcommand> [package name]/ [message type] Subcommands: show, type, and list       |
-| rosservice | This displays the runtime information about various services and allows the display of messages being sent to a topic | $ rosservice <subcommand> [service name] Subcommands: args, call, find, info, list, and type |
-| rosparam   | This is used to get and set parameters (data) used by nodes                                                           | $ rosparam <subcommand> [parameter] Subcommands: get, set, list, and delete                  |
+| rosnode    | This shows information about nodes and lists the active nodes                                                         | $ rosnode info [node name] $ rosnode [subcommand] Subcommand: list                           |
+| rostopic   | This shows information about ROS topics                                                                               | $ rostopic [subcommand] [topic name] Subcommands: echo, info, and type                       |
+| rosmsg     | This shows information about the message types                                                                        | $ rosmsg [subcommand] [package name]/ [message type] Subcommands: show, type, and list       |
+| rosservice | This displays the runtime information about various services and allows the display of messages being sent to a topic | $ rosservice [subcommand] [service name] Subcommands: args, call, find, info, list, and type |
+| rosparam   | This is used to get and set parameters (data) used by nodes                                                           | $ rosparam [subcommand] [parameter] Subcommands: get, set, list, and delete                  |
 
 ### rosnode
 

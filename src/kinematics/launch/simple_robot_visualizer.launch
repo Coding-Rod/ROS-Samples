@@ -1,0 +1,7 @@
+<launch>
+    <param name="robot_description" textfile="$(find kinematics)/urdf/simple_robot.urdf"/>
+    <!-- <node name="joinstate_publisher_rr" pkg="kinematics" type="joinstate_publisher_rr.py"></node> -->
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/> 
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/> 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kinematics)/urdf.rviz" required="true"/>
+</launch>

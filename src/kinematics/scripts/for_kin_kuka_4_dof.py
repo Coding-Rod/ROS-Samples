@@ -31,6 +31,10 @@ T03p=T03*T33p
 T04=T03p*T3p4
 T05=T04*T45
 
+print("x: ",T05[0,3])
+print("y: ",T05[1,3])
+print("z: ",T05[2,3])
+
 pub = rospy.Publisher('joint_states', JointState, queue_size=1)
 pos = rospy.Publisher('position', Point, queue_size=1)
 position = Point()

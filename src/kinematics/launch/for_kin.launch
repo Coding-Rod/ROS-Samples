@@ -1,0 +1,10 @@
+<launch>
+    <!-- <param name="robot_description" textfile="$(find kinematics)/urdf/simple_robot.urdf"/> -->
+    <!-- <param name="robot_description" textfile="$(find kinematics)/urdf/simple_robot_PR.urdf"/> -->
+    <param name="robot_description" textfile="$(find kinematics)/urdf/simple_robot.urdf"/>
+    <!-- <node name="for_kin_PR2" pkg="kinematics" type="for_kin_PR2.py"></node> -->
+    <node name="for_kin_kuka_4_dof" pkg="kinematics" type="for_kin_kuka_4_dof.py"></node>
+    <!-- <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>  -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/> 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kinematics)/urdf.rviz" required="true"/>
+</launch>

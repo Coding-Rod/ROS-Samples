@@ -43,7 +43,7 @@
 		<parent link="link1"/>
 		<child link="link2"/>
 		<origin xyz ="0 0 0.4"/> <!-- related to joint 1-->
-		<axis xyz="0 1 0"/>
+		<axis xyz="0 -1 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
@@ -67,7 +67,7 @@
 		<parent link="link2"/>
 		<child link="link3"/>
 		<origin xyz ="0.4 0 0"/> <!-- related to joint 2-->
-		<axis xyz="0 1 0"/>
+		<axis xyz="0 -1 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
@@ -87,7 +87,7 @@
 	</link>
 	
 	<!-- fourth joint-->
-	<joint name="joint4" type= "revolute"> <!-- types: revolute and prismatic -->
+	<joint name="joint4" type= "fixed"> <!-- types: fixed and prismatic -->
 		<parent link="link3"/>
 		<child link="link4"/>
 		<origin xyz ="0.1 0 0"/> <!-- related to joint 3-->
@@ -111,7 +111,7 @@
 	</link>
 	
 	<!-- fifth joint-->
-	<joint name="joint5" type= "revolute"> <!-- types: revolute and prismatic -->
+	<joint name="joint5" type= "fixed"> <!-- types: fixed and prismatic -->
 		<parent link="link4"/>
 		<child link="link5"/>
 		<origin xyz ="0.3 0 0"/> <!-- related to joint 4-->
@@ -134,7 +134,7 @@
 	</link>
 	
 	<!-- sixth joint-->
-	<joint name="joint6" type= "revolute"> <!-- types: revolute and prismatic -->
+	<joint name="joint6" type= "fixed"> <!-- types: fixed and prismatic -->
 		<parent link="link5"/>
 		<child link="link6"/>
 		<origin xyz ="0.1 0 0"/> <!-- related to joint 5-->

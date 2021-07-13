@@ -9,7 +9,7 @@
 			</geometry>
 			<origin rpy="0 0 0" xyz="0 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
 			<material name= "base_color">
-				<color rgba="0 0 0 1"/> 
+				<color rgba="1 1 0 1"/> 
 			</material>
 		</visual>
 	
@@ -19,7 +19,7 @@
 		<parent link="base_link"/>
 		<child link="link1"/>
 		<origin xyz ="0 0 0"/>
-		<axis xyz="0 0 -1"/>
+		<axis xyz="0 0 1"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
@@ -32,17 +32,18 @@
 			</geometry>
 			<origin rpy="0 0 0" xyz="0 0 0.2"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
 			<material name= "link1_color">
-				<color rgba="0.145 0.588 0.745 1"/> 
+				<color rgba="1 0 0 1"/> 
 			</material>
 		</visual>
 	
 	</link>
 	
+	
 	<!-- second joint-->
 	<joint name="joint2" type= "revolute"> <!-- types: revolute and prismatic -->
 		<parent link="link1"/>
 		<child link="link2"/>
-		<origin xyz ="0 0 0.4"/> <!-- related to joint 1-->
+		<origin xyz ="0 0.05 0.4"/>
 		<axis xyz="0 -1 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
@@ -66,19 +67,20 @@
 	<joint name="joint3" type= "revolute"> <!-- types: revolute and prismatic -->
 		<parent link="link2"/>
 		<child link="link3"/>
-		<origin xyz ="0.4 0 0"/> <!-- related to joint 2-->
+		<origin xyz ="0.4 0 0"/>
 		<axis xyz="0 -1 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
 	</joint>
+	
 	<!-- link3-->
 	<link name= "link3">
 		<visual>
 			<geometry>
-				<cylinder length="0.1" radius="0.05"/>
+				<cylinder length="0.06" radius="0.04"/>
 			</geometry>
-			<origin rpy="0 1.5707 0" xyz="0.05 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
+			<origin rpy="0 1.5707 0" xyz="0.03 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
 			<material name= "link3_color">
 				<color rgba="0 1 1 1"/> 
 			</material>
@@ -87,16 +89,17 @@
 	</link>
 	
 	<!-- fourth joint-->
-	<joint name="joint4" type= "fixed"> <!-- types: fixed and prismatic -->
+	<joint name="joint4" type= "revolute"> <!-- types: revolute and prismatic -->
 		<parent link="link3"/>
 		<child link="link4"/>
-		<origin xyz ="0.1 0 0"/> <!-- related to joint 3-->
+		<origin xyz ="0.06 0 0"/>
 		<axis xyz="-1 0 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
 	</joint>
-	<!-- link4-->
+	
+	<!-- link4 -->
 	<link name= "link4">
 		<visual>
 			<geometry>
@@ -104,60 +107,60 @@
 			</geometry>
 			<origin rpy="0 1.5707 0" xyz="0.15 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
 			<material name= "link4_color">
-				<color rgba="0 1 1 1"/> 
+				<color rgba="0.3 0.5 1 1"/> 
 			</material>
 		</visual>
 	
 	</link>
 	
 	<!-- fifth joint-->
-	<joint name="joint5" type= "fixed"> <!-- types: fixed and prismatic -->
+	<joint name="joint5" type= "revolute"> types: revolute and prismatic
 		<parent link="link4"/>
 		<child link="link5"/>
-		<origin xyz ="0.3 0 0"/> <!-- related to joint 4-->
-		<axis xyz="0 1 0"/>
+		<origin xyz ="0.3 0 0"/>
+		<axis xyz="0 -1 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
 	</joint>
-	<!-- link5-->
+	
+	<!-- link5 -->
 	<link name= "link5">
 		<visual>
 			<geometry>
-				<cylinder length="0.1" radius="0.04"/>
+				<cylinder length="0.06" radius="0.04"/>
 			</geometry>
-			<origin rpy="0 1.5707 0" xyz="0.05 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
+			<origin rpy="0 1.5707 0" xyz="0.03 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
 			<material name= "link5_color">
-				<color rgba="0 0 1 1"/> 
+				<color rgba="1 0.5 0.8 1"/> 
 			</material>
 		</visual>
+	
 	</link>
 	
 	<!-- sixth joint-->
-	<joint name="joint6" type= "fixed"> <!-- types: fixed and prismatic -->
+	<joint name="joint6" type= "fixed"> <!-- types: revolute and prismatic -->
 		<parent link="link5"/>
 		<child link="link6"/>
-		<origin xyz ="0.1 0 0"/> <!-- related to joint 5-->
+		<origin xyz ="0.06 0 0"/>
 		<axis xyz="-1 0 0"/>
 		<limit effort="300" velocity="0.1" lower="-3.14159" upper="3.14159"/>
 		<dynamics damping="50" friction="1"/>
 	
 	</joint>
-	<!-- link6-->
+	
+	<!-- link6 -->
 	<link name= "link6">
 		<visual>
 			<geometry>
-				<cylinder radius="0.01" length="0.02"/>
-				<!-- <box size="0.2 0.01 0.01"/> -->
+				<box size="0.04 0.04 0.01"/>
 			</geometry>
 			<origin rpy="0 1.5707 0" xyz="0.005 0 0"/> <!-- rpy: roll pitch yaw -> orientation xyz -> position --> 
 			<material name= "link6_color">
-				<color rgba="0 0 0 1"/> 
+				<color rgba="1 1 0 1"/> 
 			</material>
 		</visual>
+	
 	</link>
 	
-	
 	</robot>
-	
-	

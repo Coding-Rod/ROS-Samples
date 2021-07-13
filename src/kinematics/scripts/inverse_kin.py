@@ -18,14 +18,14 @@ header = Header()
 joint_msg = JointState()
 seq = 0
 header.frame_id = ''
-joint_msg.name = ['joint1','joint2','joint3','joint4']
-angles = [0.0, 0.0, 0.0, 0.0]
+joint_msg.name = ['joint1','joint2','joint3']
+angles = [0.0, 0.0, 0.0]
 alpha=0.3 #learning rate
 iterations = 100
 pub = rospy.Publisher('joint_states', JointState, queue_size=10)
-px=-0.2*sin(t2)*sin(t3)*cos(t1) + 0.2*cos(t1)*cos(t2)*cos(t3) + 0.2*cos(t1)*cos(t2)
-py=-0.2*sin(t1)*sin(t2)*sin(t3) + 0.2*sin(t1)*cos(t2)*cos(t3) + 0.2*sin(t1)*cos(t2)
-pz=0.2*sin(t2)*cos(t3) + 0.2*sin(t2) + 0.2*sin(t3)*cos(t2) + 0.4
+px= -0.1*sin(t2)*sin(t3)*cos(t1) + 0.1*cos(t1)*cos(t2)*cos(t3) + 0.4*cos(t1)*cos(t2)
+py= 0.1*sin(t1)*sin(t2)*sin(t3) - 0.1*sin(t1)*cos(t2)*cos(t3) - 0.4*sin(t1)*cos(t2)
+pz= 0.1*sin(t2)*cos(t3) + 0.4*sin(t2) + 0.1*sin(t3)*cos(t2) + 0.4
 
 J=Matrix([[diff(px,t1),diff(px,t2),diff(px,t3)],[diff(py,t1),diff(py,t2),diff(py,t3)],[diff(pz,t1),diff(pz,t2),diff(pz,t3)]])
 def callback(data): #callback function

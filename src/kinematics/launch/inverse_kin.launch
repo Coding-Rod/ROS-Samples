@@ -1,9 +1,10 @@
 <launch>
   <!-- <param name="robot_description" textfile="$(find kinematics)/urdf/simple_robot.urdf"/> -->
-  <include file="$(find kinematics)/launch/load_kr6r900sixx.launch" />
+  <!-- <include file="$(find kinematics)/launch/load_kr6r900sixx.launch" /> -->
+  <param name="robot_description" textfile="$(find kinematics)/urdf/scara.urdf"/>
   <!-- <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/> --> 
  <!-- <node name="inverse_kin" pkg="kinematics" type="inverse_kin.py" output = "screen" /> -->
- <node name="inverse_kin_6_dof" pkg="kinematics" type="inverse_kin_6_dof.py" output = "screen" />
+ <node name="inverse_kin_da" pkg="kinematics" type="inverse_kin_da.py" output = "screen" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/> 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kinematics)/urdf.rviz" required="true"/>
 </launch>

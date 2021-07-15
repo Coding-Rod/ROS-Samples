@@ -23,76 +23,76 @@ def callback(data):
     print ("state ",state)
 
     if state == 0 :
-	if x<2:
-	   vel.linear.x=0.2
-	   vel.angular.z=0
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=1
+		if x<2:
+			vel.linear.x=0.2
+			vel.angular.z=0
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=1
 
     if state == 1 :
-	if yaw > -1.5707:
-	   vel.linear.x=0
-	   vel.angular.z=0.2
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=2
+		if yaw > -1.5707:
+			vel.linear.x=0
+			vel.angular.z=0.2
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=2
 
     if state == 2 :
-	if y > -2:
-	   vel.linear.x=0.2
-	   vel.angular.z=0
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=3
+		if y > -2:
+			vel.linear.x=0.2
+			vel.angular.z=0
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=3
 
     if state == 3 :
-	if abs(yaw) < 3.14:
-	   vel.linear.x=0
-	   vel.angular.z=0.2
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=4
+		if abs(yaw) < 3.14:
+			vel.linear.x=0
+			vel.angular.z=0.2
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=4
 
     if state == 4 :
-	if x > 0 :
-	   vel.linear.x=0.2
-	   vel.angular.z=0
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=5
+		if x > 0 :
+			vel.linear.x=0.2
+			vel.angular.z=0
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=5
 
     if state == 5 :
-	if abs(yaw) > 1.57:
-	   vel.linear.x=0
-	   vel.angular.z=0.2
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=6
+		if abs(yaw) > 1.57:
+			vel.linear.x=0
+			vel.angular.z=0.2
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=6
 
     if state == 6 :
-	if y < 0 :
-	   vel.linear.x=0.2
-	   vel.angular.z=0
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=7
+		if y < 0 :
+			vel.linear.x=0.2
+			vel.angular.z=0
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=7
 
     if state == 7 :
-	if yaw > 0:
-	   vel.linear.x=0
-	   vel.angular.z=0.2
-	else:
-	   vel.linear.x=0
-	   vel.angular.z=0
-	   state=0
+		if yaw > 0:
+			vel.linear.x=0
+			vel.angular.z=0.2
+		else:
+			vel.linear.x=0
+			vel.angular.z=0
+			state=0
 
     pub.publish(vel)
 def listener():

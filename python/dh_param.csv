@@ -1,0 +1,7 @@
+Joint,theta,d,a,alpha
+1,0,0,0,pi/2
+1_prima,t1,0,0,-pi/2
+2,pi,l1,0,pi/2
+3,t2,0,l2,pi
+3_prima,pi/2+t3,0,l3,0
+4,-pi/2,0,0,0

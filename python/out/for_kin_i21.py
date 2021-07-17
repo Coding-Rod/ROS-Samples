@@ -38,9 +38,9 @@ T04=T03*T34
 T05=T04*T45
 T06=T05*T56
 
-print("px= "+str(T06[0,3].subs([])))
-print("py= "+str(T06[1,3].subs([])))
-print("pz= "+str(T06[2,3].subs([])))
+print("px= "+str(T06[0,3].subs([(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])))
+print("py= "+str(T06[1,3].subs([(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])))
+print("pz= "+str(T06[2,3].subs([(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])))
 
 pub = rospy.Publisher('joint_states', JointState, queue_size=1)
 pos = rospy.Publisher('position', Point, queue_size=1)
@@ -67,7 +67,7 @@ def callback(data):
     joint_msg.header=header
     joint_msg.position=angles
     pub.publish(joint_msg)
-    T06n=T06.subs([(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(t6,data.angular.z),])
+    T06n=T06.subs([(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(t6,data.angular.z),(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])
     position.x= T06n[0,3] #modify variable name T0Xn
     position.y= T06n[1,3] #modify variable name T0Xn
     position.z= T06n[2,3] #modify variable name T0Xn
@@ -75,7 +75,7 @@ def callback(data):
     print(angles)
 
 def listener():
-    rospy.init_node('for_kin_2_20', anonymous=True)   
+    rospy.init_node('for_kin_i21', anonymous=True)   
     rospy.Subscriber("angles", Twist, callback)
 
     rospy.spin() #keep alive

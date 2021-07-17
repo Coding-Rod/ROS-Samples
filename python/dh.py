@@ -62,7 +62,7 @@ f.close()
 # %% Declare joint and angles
 aux_st = 'joint_msg.name = ['
 for i in range(joint_number):
-    aux_st += f"'joint{i+1}',"
+    aux_st += f"'joint_{i+1}',"
 aux_st = aux_st[:-1]+']\n'
 aux_st += 'angles = ['+str('0.0,'*joint_number)[:-1]+']\n'
 
@@ -116,7 +116,7 @@ f.close()
 # %% Declare joint and angles
 aux_st = 'joint_msg.name = ['
 for i in range(joint_number):
-    aux_st += f"'joint{i+1}',"
+    aux_st += f"'joint_{i+1}',"
 aux_st = aux_st[:-1]+']\n'
 aux_st += 'angles = ['+str('0.0,'*joint_number)[:-1]+']\n'
 

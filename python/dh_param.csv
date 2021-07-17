@@ -1,8 +1,7 @@
 Joint,theta,d,a,alpha,variable,value,name
-1,0,d1,0,0,d1,0.0925,for_kin_2_20
-2,t1,l1,d2,pi/2,l1,0.2105,inverse_kin_2_20
-3,t2,-d3,-l2,0,d2,0.1
-4,t3+pi,d4,-l3,pi/2,l2,0.25
-5,0,a1,0,0,d3,0.05
-,,,,,l3,0.25
-,,,,,d4,0.06
+1,0,l1,0,0,l1,0.55,for_kin_i21
+2,t1,0,-l2,-pi/2,l2,0.15,inverse_kin_i21
+3,t2,0,l3,pi,l3,0.825
+4,t3,0,0,pi/2,l4,0.625
+5,t4+pi,-l4,0,pi/2,l5,0.11
+5,t5-pi/2,0,l5,0

@@ -26,10 +26,9 @@ pub = rospy.Publisher('joint_states', JointState, queue_size=10)
 joint_msg.name = ['joint_1','joint_2','joint_3','joint_4','joint_5']
 angles = [0.0,0.0,0.0,0.0,0.0]
 
-
-#///////////////////////////////////////////////////
-# Paste your px, py, pz params HERE
-#///////////////////////////////////////////////////
+px= 0.11*(-(-sin(t2)*sin(t3)*cos(t1) - cos(t1)*cos(t2)*cos(t3))*cos(t4) + sin(t1)*sin(t4))*sin(t5) - 0.11*(sin(t2)*cos(t1)*cos(t3) - sin(t3)*cos(t1)*cos(t2))*cos(t5) - 0.625*sin(t2)*cos(t1)*cos(t3) + 0.625*sin(t3)*cos(t1)*cos(t2) - 0.825*cos(t1)*cos(t2) + 0.15*cos(t1)
+py= 0.11*(-(-sin(t1)*sin(t2)*sin(t3) - sin(t1)*cos(t2)*cos(t3))*cos(t4) - sin(t4)*cos(t1))*sin(t5) - 0.11*(sin(t1)*sin(t2)*cos(t3) - sin(t1)*sin(t3)*cos(t2))*cos(t5) - 0.625*sin(t1)*sin(t2)*cos(t3) + 0.625*sin(t1)*sin(t3)*cos(t2) - 0.825*sin(t1)*cos(t2) + 0.15*sin(t1)
+pz= -0.11*(-sin(t2)*sin(t3) - cos(t2)*cos(t3))*cos(t5) - 0.11*(-sin(t2)*cos(t3) + sin(t3)*cos(t2))*sin(t5)*cos(t4) + 0.625*sin(t2)*sin(t3) - 0.825*sin(t2) + 0.625*cos(t2)*cos(t3) + 0.55
 
 
 J=Matrix([[diff(px,t1),diff(px,t2),diff(px,t3),diff(px,t4),diff(px,t5)],
@@ -62,7 +61,7 @@ def callback(data): #callback function
         seq += 1
         time.sleep(0.5)    
 def subscriber():
-    rospy.init_node('inverse_kin_2_20', anonymous=True)
+    rospy.init_node('inverse_kin_i21', anonymous=True)
     rospy.Subscriber("position", Point, callback) 
     rospy.spin()
 

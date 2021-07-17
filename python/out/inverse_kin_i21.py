@@ -62,7 +62,7 @@ def callback(data): #callback function
         seq += 1
         time.sleep(0.5)    
 def subscriber():
-    rospy.init_node('inverse_kin_2_20', anonymous=True)
+    rospy.init_node('inverse_kin_i21', anonymous=True)
     rospy.Subscriber("position", Point, callback) 
     rospy.spin()
 

@@ -26,7 +26,7 @@ def dh_matrix (t,d,a,aph):
 	return T
 
 T01=dh_matrix(0,l1,0,0)
-T12=dh_matrix(t1,0,-l2,-pi/2)
+T12=dh_matrix(t1+pi,0,-l2,-pi/2)
 T23=dh_matrix(t2,0,l3,pi)
 T34=dh_matrix(t3,0,0,pi/2)
 T45=dh_matrix(t4+pi,-l4,0,pi/2)
@@ -38,9 +38,9 @@ T04=T03*T34
 T05=T04*T45
 T06=T05*T56
 
-print("px= "+str(T06[0,3].subs([])))
-print("py= "+str(T06[1,3].subs([])))
-print("pz= "+str(T06[2,3].subs([])))
+print("px= "+str(T06[0,3].subs([(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])))
+print("py= "+str(T06[1,3].subs([(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])))
+print("pz= "+str(T06[2,3].subs([(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])))
 
 pub = rospy.Publisher('joint_states', JointState, queue_size=1)
 pos = rospy.Publisher('position', Point, queue_size=1)
@@ -59,7 +59,6 @@ def callback(data):
     angles[2]=data.linear.z
     angles[3]=data.angular.x
     angles[4]=data.angular.y
-    angles[5]=data.angular.z
     global seq
     seq=seq+1
     header.seq = seq
@@ -67,7 +66,7 @@ def callback(data):
     joint_msg.header=header
     joint_msg.position=angles
     pub.publish(joint_msg)
-    T06n=T06.subs([(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(t6,data.angular.z),])
+    T06n=T06.subs([(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(l1, 0.55), (l2, 0.15), (l3, 0.825), (l4, 0.625), (l5, 0.11)])
     position.x= T06n[0,3] #modify variable name T0Xn
     position.y= T06n[1,3] #modify variable name T0Xn
     position.z= T06n[2,3] #modify variable name T0Xn
@@ -75,7 +74,7 @@ def callback(data):
     print(angles)
 
 def listener():
-    rospy.init_node('for_kin_2_20', anonymous=True)   
+    rospy.init_node('for_kin_i21', anonymous=True)   
     rospy.Subscriber("angles", Twist, callback)
 
     rospy.spin() #keep alive

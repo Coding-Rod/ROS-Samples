@@ -1,0 +1,7 @@
+header = Header()
+joint_msg = JointState()
+seq = 0
+header.frame_id = ''
+iterations = 100
+alpha=0.3 #learning rate
+pub = rospy.Publisher('joint_states', JointState, queue_size=10)

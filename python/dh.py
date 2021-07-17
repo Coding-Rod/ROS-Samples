@@ -10,7 +10,10 @@ df
 #%% Import libraries
 f = open("base/lib.txt", "r")
 joint_number = (max(df.Joint))
-status = int(joint_number/2-1)
+if joint_number > 4:
+    status = 2
+else:
+    status = int(joint_number/2-1)
 st = f.read().split('######')[status]
 f.close()
 print(st)
@@ -73,7 +76,7 @@ for i,j in enumerate(['x','y','z']):
 st += '\n'+aux_st
 
 # %% pos publish and main
-f = open("base/maf.txt", "r")
+f = open("base/formaf.txt", "r")
 st += f.read().replace('###node_name###',df.name[0])
 f.close()
 
@@ -83,3 +86,81 @@ print(st)
 f = open(f"out/{df.name[0]}.py", "w")
 f.write(st)
 f.close()
+
+# ! ////////////////////////////////////////////////////////////////// INVERSE KIN //////////////////////////////////////////////////////////////////
+#%% Import libraries
+f = open("base/lib.txt", "r")
+joint_number = (max(df.Joint))
+status = int(joint_number/2-1)
+st = f.read().split('######')[status]
+f.close()
+print(st)
+
+#%% Simbolic
+for i in df.variable:
+    try:
+        st += f"{i} = Symbol('{i.upper()}')\n"
+    except:
+        break
+st += "\n"
+
+# %% publisher
+f = open("base/pub.txt", "r")
+st += '\n'+f.read()
+f.close()
+
+# %% Declare joint and angles
+aux_st = 'joint_msg.name = ['
+for i in range(joint_number):
+    aux_st += f"'joint_a{i+1}',"
+aux_st += '\b]\n'
+aux_st += 'angles = ['+'0.0,'*joint_number+'\b]\n'
+
+st += '\n'+aux_st
+
+# %% First write
+f = open(f"out/{df.name[1]}.py", "w")
+f.write(st)
+f.close()
+# %% Temp file
+#open and read the file after the appending:
+temp = 'from sympy import *'
+
+# Simbolic
+for i in df.variable:
+    try:
+        temp += f"{i} = Symbol('{i.upper()}')\n"
+    except:
+        break
+temp += "\n"
+
+# dh_table
+aux_st = ''
+for i in range(len(df['theta'])):
+    temp += f"T{i}{i+1}=dh_matrix({df['theta'][i]},{df['d'][i]},{df['a'][i]},{df['alpha'][i]})\n"
+    if i < len(df['theta'])-1:
+        aux_st += f'T0{i+2}=T0{i+1}*T{i+1}{i+2}\n'
+temp += '\n'+aux_st
+last_t = int(aux_st[-2])
+
+# print inverse kin
+aux_st = ''
+temp += 'var = ""'
+for i,j in enumerate(['x','y','z']):
+    aux_st += f'var += "p{j}= "T0{last_t}[{i},3].subs('
+    aux_st += str(list(zip(df.variable.dropna(),df.value.dropna()))).replace("\n","").replace("'","")
+    aux_st += ')"\n'
+
+temp += '\n'+aux_st
+
+temp += f'f = open("out/{df.name[1]}.py",a)\n'
+temp += "f.write(temp)\n"
+temp += "f.close()"
+
+# Write temp
+f = open("temp.py", "w")
+f.write(temp)
+f.close()
+
+
+# %%

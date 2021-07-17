@@ -20,11 +20,12 @@ header = Header()
 joint_msg = JointState()
 seq = 0
 header.frame_id = ''
-joint_msg.name =  ['joint_a1', 'joint_a2', 'joint_a3', 'joint_a4', 'joint_a5', 'joint_a6']
-angles = [0.0, 0.0, 0.0, 0.0,0.0,0.0]
-alpha=0.3 #learning rate
 iterations = 100
+alpha=0.3 #learning rate
 pub = rospy.Publisher('joint_states', JointState, queue_size=10)
+joint_msg.name =  ['joint_a1', 'joint_a2', 'joint_a3', 'joint_a4', 'joint_a5', 'joint_a6']
+angles = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
 px=0.08*(-(sin(t2)*cos(t1)*cos(t3) + sin(t3)*cos(t1)*cos(t2))*cos(t4) - sin(t1)*sin(t4))*sin(t5) - 0.08*(sin(t2)*sin(t3)*cos(t1) - cos(t1)*cos(t2)*cos(t3))*cos(t5) - 0.42*sin(t2)*sin(t3)*cos(t1) + 0.035*sin(t2)*cos(t1)*cos(t3) + 0.035*sin(t3)*cos(t1)*cos(t2) + 0.42*cos(t1)*cos(t2)*cos(t3) + 0.455*cos(t1)*cos(t2) + 0.025*cos(t1)
 py=0.08*(-(-sin(t1)*sin(t2)*cos(t3) - sin(t1)*sin(t3)*cos(t2))*cos(t4) - sin(t4)*cos(t1))*sin(t5) - 0.08*(-sin(t1)*sin(t2)*sin(t3) + sin(t1)*cos(t2)*cos(t3))*cos(t5) + 0.42*sin(t1)*sin(t2)*sin(t3) - 0.035*sin(t1)*sin(t2)*cos(t3) - 0.035*sin(t1)*sin(t3)*cos(t2) - 0.42*sin(t1)*cos(t2)*cos(t3) - 0.455*sin(t1)*cos(t2) - 0.025*sin(t1)
 pz=-0.08*(-sin(t2)*sin(t3) + cos(t2)*cos(t3))*sin(t5)*cos(t4) - 0.08*(sin(t2)*cos(t3) + sin(t3)*cos(t2))*cos(t5) - 0.035*sin(t2)*sin(t3) - 0.42*sin(t2)*cos(t3) - 0.455*sin(t2) - 0.42*sin(t3)*cos(t2) + 0.035*cos(t2)*cos(t3) + 0.4

@@ -77,12 +77,11 @@ f = open("base/maf.txt", "r")
 st += f.read().replace('###node_name###',df.name[0])
 f.close()
 
-#region Debug
+# %% Write python file
 print(st)
 
 f = open("out/for_kin.py", "w")
 f.write(st)
 f.close()
-#endregion Debug
 
-# %%
+# ! ////////////////////////////////// INVERSE KIN /////////////////////////////////e/

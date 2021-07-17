@@ -40,8 +40,9 @@ for i in range(len(df['theta'])):
     st += f"T{i}{i+1}=dh_matrix({df['theta'][i]},{df['d'][i]},{df['a'][i]},{df['alpha'][i]})\n"
     if i < len(df['theta'])-1:
         aux_st += f'T0{i+2}=T0{i+1}*T{i+1}{i+2}\n'
+        last_t = (i+2)
 st += '\n'+aux_st
-last_t = int(aux_st[-2])
+
 
 # %% print inverse kin
 aux_st = ''
@@ -61,7 +62,7 @@ f.close()
 # %% Declare joint and angles
 aux_st = 'joint_msg.name = ['
 for i in range(joint_number):
-    aux_st += f"'joint_a{i+1}',"
+    aux_st += f"'joint{i+1}',"
 aux_st = aux_st[:-1]+']\n'
 aux_st += 'angles = ['+str('0.0,'*joint_number)[:-1]+']\n'
 
@@ -73,14 +74,14 @@ f.close()
 # print(aux_st)
 
 # %% T0Xn
-aux_st = f"    T0{last_t}n=T0{last_t}.subs("
+aux_st = f"    T0{last_t}n=T0{last_t}.subs(["
 f = open("base/subs.txt", "r")
 aux_st += f.read().split('######')[status]
 f.close()
-aux_st += str(list(zip(df.variable.dropna(),df.value.dropna()))).replace("\n","").replace("'","")
-aux_st += '\n'
+aux_st += str(list(zip(df.variable.dropna(),df.value.dropna())))[1:-1].replace("\n","").replace("'","")
+aux_st += '])\n'
 for i,j in enumerate(['x','y','z']):
-    aux_st += f"    position.{j}= T08n[{i},3] #modify variable name T0Xn\n"
+    aux_st += f"    position.{j}= T0{last_t}n[{i},3] #modify variable name T0Xn\n"
 st += '\n'+aux_st
 
 # %% pos publish and main
@@ -115,7 +116,7 @@ f.close()
 # %% Declare joint and angles
 aux_st = 'joint_msg.name = ['
 for i in range(joint_number):
-    aux_st += f"'joint_a{i+1}',"
+    aux_st += f"'joint{i+1}',"
 aux_st = aux_st[:-1]+']\n'
 aux_st += 'angles = ['+str('0.0,'*joint_number)[:-1]+']\n'
 
@@ -125,62 +126,14 @@ st += '\n'+aux_st+'\n'
 f = open(f"out/{df.name[1]}.py", "w")
 f.write(st)
 f.close()
-# %% Temp file
-#open and read the file after the appending:
-temp = 'from sympy import *\n'
 
-# def dh_matrix
-f = open("base/dhm.txt", "r")
-temp += '\n'+f.read()+'\n'
-f.close()
-
-# Simbolic
-for i in range(joint_number):
-    temp += f"t{i+1} = Symbol('t{i+1}')\n"
-for i in df.variable:
-    try:
-        temp += f"{i} = Symbol('{i.upper()}')\n"
-    except:
-        break
-temp += "\n"
-
-# dh_table
-aux_st = ''
-for i in range(len(df['theta'])):
-    temp += f"T{i}{i+1}=dh_matrix({df['theta'][i]},{df['d'][i]},{df['a'][i]},{df['alpha'][i]})\n"
-    if i < len(df['theta'])-1:
-        aux_st += f'T0{i+2}=T0{i+1}*T{i+1}{i+2}\n'
-temp += '\n'+aux_st
-last_t = int(aux_st[-2])
-
-# print inverse kin
-aux_st = ''
-temp += 'var = ""'
-for i,j in enumerate(['x','y','z']):
-    aux_st += f'var += "p{j}=" \n'
-    aux_st += f'var += str(T0{last_t}[{i},3].subs('
-    aux_st += str(list(zip(df.variable.dropna(),df.value.dropna()))).replace("\n","").replace("'","")
-    aux_st += '))\n'
-    aux_st += 'var += "\\n"\n'
-
-temp += '\n'+aux_st
-
-temp += f'f = open("out/{df.name[1]}.py","a")\n'
-temp += "f.write(var)\n"
-temp += "f.close()"
-
-# Write temp
-f = open("temp.py", "w")
-f.write(temp)
-f.close()
-
-
-# Run temp
-from temp import *
-
-os.remove('temp.py')
 # %% Jacobian
-st = "\nJ=Matrix([["
+# %% publisher
+f = open("base/prm.txt", "r")
+st = '\n'+f.read()
+f.close()
+
+st += "\nJ=Matrix([["
 
 stx = ''
 sty = ''

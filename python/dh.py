@@ -10,7 +10,7 @@ df
 # ! ////////////////////////////////// FOR KIN /////////////////////////////////e/
 #%% Import libraries
 f = open("base/lib.txt", "r")
-joint_number = (max(df.Joint))
+joint_number = int(max(df.Joint.dropna()))
 if joint_number > 4:
     status = 2
 else:
@@ -47,9 +47,9 @@ st += '\n'+aux_st
 # %% print inverse kin
 aux_st = ''
 for i,j in enumerate(['x','y','z']):
-    aux_st += f'print("{j}: ")\nprint(T0{last_t}[{i},3].subs('
+    aux_st += f'print("p{j}= "+str(T0{last_t}[{i},3].subs('
     aux_st += str(list(zip(df.variable.dropna(),df.value.dropna()))).replace("\n","").replace("'","")
-    aux_st += '))\n'
+    aux_st += ')))\n'
 
 st += '\n'+aux_st
 

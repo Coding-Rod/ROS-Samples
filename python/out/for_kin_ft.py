@@ -14,27 +14,26 @@ t2 = Symbol('t2')
 t3 = Symbol('t3')
 t4 = Symbol('t4')
 t5 = Symbol('t5')
-t6 = Symbol('t6')
-l1 = Symbol('L1')
-l2 = Symbol('L2')
-a1 = Symbol('A1')
 d1 = Symbol('D1')
-l4 = Symbol('L4')
-l5 = Symbol('L5')
+l1 = Symbol('L1')
+d2 = Symbol('D2')
+l2 = Symbol('L2')
+d3 = Symbol('D3')
+l3 = Symbol('L3')
+d4 = Symbol('D4')
 
 
 def dh_matrix (t,d,a,aph):
 	T=Matrix([[cos(t), -sin(t)*cos(aph),sin(t)*sin(aph), a*cos(t)],[sin(t), cos(t)*cos(aph), -cos(t)*sin(aph), a*sin(t)],[0,sin(aph), cos(aph), d],[0, 0, 0, 1]])
 	return T
 
-T01=dh_matrix(pi,l1,0,pi)
-T12=dh_matrix(pi+t1,0,a1,pi/2)
-T23=dh_matrix(t2,0,l2,0)
-T34=dh_matrix(t3-pi/2,0,d1,pi/2)
-T45=dh_matrix(t4+pi,-l4,0,pi/2)
-T56=dh_matrix(t5+pi,0,0,pi/2)
-T67=dh_matrix(0,-l5,0,0)
-T78=dh_matrix(t6,0,0,0)
+T01=dh_matrix(0,d1,0,0)
+T12=dh_matrix(t1,l1,d2,pi/2)
+T23=dh_matrix(t2,-d3,-l2,0)
+T34=dh_matrix(t3+pi,d4,-l3,pi/2)
+T45=dh_matrix(0,a1,0,0)
+T56=dh_matrix(nan,nan,nan,nan)
+T67=dh_matrix(nan,nan,nan,nan)
 
 T02=T01*T12
 T03=T02*T23
@@ -42,11 +41,10 @@ T04=T03*T34
 T05=T04*T45
 T06=T05*T56
 T07=T06*T67
-T08=T07*T78
 
-print("px= "+str(T08[0,3].subs([(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)])))
-print("py= "+str(T08[1,3].subs([(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)])))
-print("pz= "+str(T08[2,3].subs([(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)])))
+print("px= "+str(T07[0,3].subs([(d1, 0.0925), (l1, 0.2105), (d2, 0.1), (l2, 0.25), (d3, 0.05), (l3, 0.25), (d4, 0.06)])))
+print("py= "+str(T07[1,3].subs([(d1, 0.0925), (l1, 0.2105), (d2, 0.1), (l2, 0.25), (d3, 0.05), (l3, 0.25), (d4, 0.06)])))
+print("pz= "+str(T07[2,3].subs([(d1, 0.0925), (l1, 0.2105), (d2, 0.1), (l2, 0.25), (d3, 0.05), (l3, 0.25), (d4, 0.06)])))
 
 pub = rospy.Publisher('joint_states', JointState, queue_size=1)
 pos = rospy.Publisher('position', Point, queue_size=1)
@@ -56,8 +54,8 @@ seq = 0
 header.frame_id=''
 joint_msg=JointState()
 
-joint_msg.name = ['joint1','joint2','joint3','joint4','joint5','joint6']
-angles = [0.0,0.0,0.0,0.0,0.0,0.0]
+joint_msg.name = ['joint1','joint2','joint3','joint4','joint5']
+angles = [0.0,0.0,0.0,0.0,0.0]
 
 def callback(data):
     angles[0]=data.linear.x
@@ -73,15 +71,15 @@ def callback(data):
     joint_msg.header=header
     joint_msg.position=angles
     pub.publish(joint_msg)
-    T08n=T08.subs([(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(t6,data.angular.z),(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)])
-    position.x= T08n[0,3] #modify variable name T0Xn
-    position.y= T08n[1,3] #modify variable name T0Xn
-    position.z= T08n[2,3] #modify variable name T0Xn
+    T07n=T07.subs([(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(t6,data.angular.z),(d1, 0.0925), (l1, 0.2105), (d2, 0.1), (l2, 0.25), (d3, 0.05), (l3, 0.25), (d4, 0.06)])
+    position.x= T07n[0,3] #modify variable name T0Xn
+    position.y= T07n[1,3] #modify variable name T0Xn
+    position.z= T07n[2,3] #modify variable name T0Xn
     pos.publish(position)
     print(angles)
 
 def listener():
-    rospy.init_node('for_kin_1', anonymous=True)   
+    rospy.init_node('for_kin_ft', anonymous=True)   
     rospy.Subscriber("angles", Twist, callback)
 
     rospy.spin() #keep alive

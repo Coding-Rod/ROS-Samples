@@ -1,6 +1,7 @@
 #%%
 import pandas as pd
 import numpy as np
+import os
 
 #%% Read csv
 df = pd.read_csv('dh_param.csv')
@@ -76,7 +77,7 @@ for i,j in enumerate(['x','y','z']):
 st += '\n'+aux_st
 
 # %% pos publish and main
-f = open("base/formaf.txt", "r")
+f = open("base/maf.txt", "r")
 st += f.read().replace('###node_name###',df.name[0])
 f.close()
 
@@ -163,4 +164,6 @@ f.write(temp)
 f.close()
 
 
-# %%
+# Run temp
+from temp import *
+

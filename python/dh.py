@@ -83,5 +83,3 @@ print(st)
 f = open(f"out/{df.name[0]}.py", "w")
 f.write(st)
 f.close()
-
-# ! ////////////////////////////////// INVERSE KIN /////////////////////////////////e/

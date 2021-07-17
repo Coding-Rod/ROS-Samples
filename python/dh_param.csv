@@ -1,6 +1,6 @@
 Joint,theta,d,a,alpha,variable,value,name
 1,pi,l1,0,pi,l1,0.4,for_kin_bb
-1,pi+t1,0,a1,pi/2,l2,0.455,inverse_kin
+1,pi+t1,0,a1,pi/2,l2,0.455,
 2,t2,0,l2,0,a1,0.025,
 3,t3-pi/2,0,d1,pi/2,d1,0.035,
 4,t4+pi,-l4,0,pi/2,l4,0.42,

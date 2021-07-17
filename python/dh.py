@@ -80,7 +80,7 @@ f.close()
 # %% Write python file
 print(st)
 
-f = open("out/for_kin.py", "w")
+f = open(f"out/{df.name[0]}.py", "w")
 f.write(st)
 f.close()
 

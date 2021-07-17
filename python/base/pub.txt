@@ -1,0 +1,7 @@
+pub = rospy.Publisher('joint_states', JointState, queue_size=1)
+pos = rospy.Publisher('position', Point, queue_size=1)
+position = Point()
+header = Header()
+seq = 0
+header.frame_id=''
+joint_msg=JointState()

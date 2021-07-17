@@ -1,0 +1,3 @@
+(t1,data.x),(t2,data.y),(t3,data.z),
+######(t1,data.x),(t2,data.y),(t3,data.z),(t4,data.w),
+######(t1,data.linear.x),(t2,data.linear.y),(t3,data.linear.z),(t4,data.angular.x),(t5,data.angular.y),(t6,data.angular.z),

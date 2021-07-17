@@ -1,0 +1,41 @@
+def callback(data):
+    angles[0]=data.x
+    angles[1]=data.y
+    angles[2]=data.z
+    global seq
+    seq=seq+1
+    header.seq = seq
+    header.stamp = rospy.get_rostime()
+    joint_msg.header=header
+    joint_msg.position=angles
+    pub.publish(joint_msg)
+
+
+######def callback(data):
+    angles[0]=data.x
+    angles[1]=data.y
+    angles[2]=data.z
+    angles[3]=data.w
+    global seq
+    seq=seq+1
+    header.seq = seq
+    header.stamp = rospy.get_rostime()
+    joint_msg.header=header
+    joint_msg.position=angles
+    pub.publish(joint_msg)
+
+
+######def callback(data):
+    angles[0]=data.linear.x
+    angles[1]=data.linear.y
+    angles[2]=data.linear.z
+    angles[3]=data.angular.x
+    angles[4]=data.angular.y
+    angles[5]=data.angular.z
+    global seq
+    seq=seq+1
+    header.seq = seq
+    header.stamp = rospy.get_rostime()
+    joint_msg.header=header
+    joint_msg.position=angles
+    pub.publish(joint_msg)

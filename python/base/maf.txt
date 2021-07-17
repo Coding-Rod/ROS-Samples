@@ -1,0 +1,9 @@
+    pos.publish(position)
+
+def listener():
+    rospy.init_node('###node_name###', anonymous=True)   
+    rospy.Subscriber("angles", Twist, callback)
+
+    rospy.spin() #keep alive
+if __name__ == '__main__':
+    listener()

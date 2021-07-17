@@ -4,7 +4,7 @@
 <launch>
     <arg name="model"   default="a0912"/>
     <arg name="ns"      default="dsr"/>
-    <arg name="gui"     default="True" />
+    <!-- <arg name="gui"     default="True" /> -->
     <arg name="remap"   default="False"/>
     <arg name="color"   default="white"/>
     <arg name="gripper" default="none"/>
@@ -18,9 +18,11 @@
 
         <!-- Send joint values -->
         <!-- integrar aqui los codigos de forward e inverse -->
-        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-        <param name="/use_gui" value="true"/>
-        </node>
+        <!-- <node name="for_kin_a0912" pkg="dsr_description" type="for_kin_a0912.py" output="screen"></node> -->
+        <node name="inverse_kin_a0912" pkg="dsr_description" type="inverse_kin_a0912.py" output="screen"></node>
+        <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"> -->
+        <!-- <param name="/use_gui" value="true"/> -->
+        <!-- </node> -->
     </group>
 
     <group if="$(eval arg('remap') == True)">

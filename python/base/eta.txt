@@ -1,0 +1,7 @@
+        e=target-cp
+        Jinv=Jsubs.H*(Jsubs*Jsubs.H)**-1
+        dt=Jinv*e
+        ti=ti+alpha*dt
+        global seq
+        header.seq = seq
+        header.stamp = rospy.Time.now()

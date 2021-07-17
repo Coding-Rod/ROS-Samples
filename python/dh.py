@@ -17,15 +17,22 @@ else:
     status = int(joint_number/2-1)
 st = f.read().split('######')[status]
 f.close()
-print(st)
+# print(st)
 
 #%% Simbolic
+for i in range(joint_number):
+    st += f"t{i+1} = Symbol('t{i+1}')\n"
 for i in df.variable:
     try:
         st += f"{i} = Symbol('{i.upper()}')\n"
     except:
         break
 st += "\n"
+
+#%% def dh_matrix
+f = open("base/dhm.txt", "r")
+st += '\n'+f.read()+'\n\n'
+f.close()
 
 #%% dh_table
 aux_st = ''
@@ -55,8 +62,8 @@ f.close()
 aux_st = 'joint_msg.name = ['
 for i in range(joint_number):
     aux_st += f"'joint_a{i+1}',"
-aux_st += '\b]\n'
-aux_st += 'angles = ['+'0.0,'*joint_number+'\b]\n'
+aux_st = aux_st[:-1]+']\n'
+aux_st += 'angles = ['+str('0.0,'*joint_number)[:-1]+']\n'
 
 st += '\n'+aux_st
 # %% callback
@@ -82,7 +89,7 @@ st += f.read().replace('###node_name###',df.name[0])
 f.close()
 
 # %% Write python file
-print(st)
+# print(st)
 
 f = open(f"out/{df.name[0]}.py", "w")
 f.write(st)
@@ -90,23 +97,18 @@ f.close()
 
 # ! ////////////////////////////////////////////////////////////////// INVERSE KIN //////////////////////////////////////////////////////////////////
 #%% Import libraries
-f = open("base/lib.txt", "r")
-joint_number = (max(df.Joint))
-status = int(joint_number/2-1)
-st = f.read().split('######')[status]
+f = open("base/ilib.txt", "r")
+st = f.read() +'\n\n'
 f.close()
-print(st)
+# print(st)
 
 #%% Simbolic
-for i in df.variable:
-    try:
-        st += f"{i} = Symbol('{i.upper()}')\n"
-    except:
-        break
+for i in range(joint_number):
+    st += f"t{i+1} = Symbol('t{i+1}')\n"
 st += "\n"
 
 # %% publisher
-f = open("base/pub.txt", "r")
+f = open("base/ipub.txt", "r")
 st += '\n'+f.read()
 f.close()
 
@@ -114,10 +116,10 @@ f.close()
 aux_st = 'joint_msg.name = ['
 for i in range(joint_number):
     aux_st += f"'joint_a{i+1}',"
-aux_st += '\b]\n'
-aux_st += 'angles = ['+'0.0,'*joint_number+'\b]\n'
+aux_st = aux_st[:-1]+']\n'
+aux_st += 'angles = ['+str('0.0,'*joint_number)[:-1]+']\n'
 
-st += '\n'+aux_st
+st += '\n'+aux_st+'\n'
 
 # %% First write
 f = open(f"out/{df.name[1]}.py", "w")
@@ -125,9 +127,16 @@ f.write(st)
 f.close()
 # %% Temp file
 #open and read the file after the appending:
-temp = 'from sympy import *'
+temp = 'from sympy import *\n'
+
+# def dh_matrix
+f = open("base/dhm.txt", "r")
+temp += '\n'+f.read()+'\n'
+f.close()
 
 # Simbolic
+for i in range(joint_number):
+    temp += f"t{i+1} = Symbol('t{i+1}')\n"
 for i in df.variable:
     try:
         temp += f"{i} = Symbol('{i.upper()}')\n"
@@ -148,14 +157,16 @@ last_t = int(aux_st[-2])
 aux_st = ''
 temp += 'var = ""'
 for i,j in enumerate(['x','y','z']):
-    aux_st += f'var += "p{j}= "T0{last_t}[{i},3].subs('
+    aux_st += f'var += "p{j}=" \n'
+    aux_st += f'var += str(T0{last_t}[{i},3].subs('
     aux_st += str(list(zip(df.variable.dropna(),df.value.dropna()))).replace("\n","").replace("'","")
-    aux_st += ')"\n'
+    aux_st += '))\n'
+    aux_st += 'var += "\\n"\n'
 
 temp += '\n'+aux_st
 
-temp += f'f = open("out/{df.name[1]}.py",a)\n'
-temp += "f.write(temp)\n"
+temp += f'f = open("out/{df.name[1]}.py","a")\n'
+temp += "f.write(var)\n"
 temp += "f.close()"
 
 # Write temp
@@ -167,3 +178,52 @@ f.close()
 # Run temp
 from temp import *
 
+os.remove('temp.py')
+# %% Jacobian
+st = "\nJ=Matrix([["
+
+stx = ''
+sty = ''
+stz = ''
+for i in range(joint_number):
+    stx += f'diff(px,t{i+1}),'
+    sty += f'diff(py,t{i+1}),'
+    stz += f'diff(pz,t{i+1}),'
+stx = stx[:-1]+'],\n          ['
+sty = sty[:-1]+'],\n          ['
+stz = stz[:-1]+']])\n\n'
+st += stx +sty + stz
+# %% Callback
+st += "def callback(data): #callback function\n    target=Matrix([data.x,data.y,data.z])\n"
+
+# %% ti matrix and for cicle
+st +=f"    ti=Matrix([{str('random(),'*joint_number)[:-1]}])\n"
+st +=f"    for i in range(0,iterations):\n"
+# %% cp Matrix and Jsubs
+st += '        cp =Matrix(['
+st_aux = ''
+for i in range(joint_number):
+    st_aux += f"(t{i+1},ti[{i}]),"
+st_aux = st_aux[:-1]
+for i in ['x','y','z']:
+    st += f'p{i}.subs(['+st_aux+']),'
+st = st[:-1]+'])\n'
+st += '        Jsubs=J.subs(['+st_aux+'])\n'
+# %% e=target -cp
+f = open("base/eta.txt",'r')
+st += f.read() + '\n\n'
+f.close()
+#%% Angles
+for i in range(joint_number):
+    st += f'        angles[{i}] = ti[{i}]\n'
+
+st += '\n'
+# %% pub publish and main
+f = open("base/imaf.txt", "r")
+st += f.read().replace('###node_name###',df.name[1])
+f.close()
+
+# %% Write python file
+f = open(f"out/{df.name[1]}.py", "a")
+f.write(st)
+f.close()

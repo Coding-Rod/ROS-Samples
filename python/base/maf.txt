@@ -1,4 +1,5 @@
     pos.publish(position)
+    print(angles)
 
 def listener():
     rospy.init_node('###node_name###', anonymous=True)   

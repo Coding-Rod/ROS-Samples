@@ -8,12 +8,24 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 
+
+t1 = Symbol('t1')
+t2 = Symbol('t2')
+t3 = Symbol('t3')
+t4 = Symbol('t4')
+t5 = Symbol('t5')
+t6 = Symbol('t6')
 l1 = Symbol('L1')
 l2 = Symbol('L2')
 a1 = Symbol('A1')
 d1 = Symbol('D1')
 l4 = Symbol('L4')
 l5 = Symbol('L5')
+
+
+def dh_matrix (t,d,a,aph):
+	T=Matrix([[cos(t), -sin(t)*cos(aph),sin(t)*sin(aph), a*cos(t)],[sin(t), cos(t)*cos(aph), -cos(t)*sin(aph), a*sin(t)],[0,sin(aph), cos(aph), d],[0, 0, 0, 1]])
+	return T
 
 T01=dh_matrix(pi,l1,0,pi)
 T12=dh_matrix(pi+t1,0,a1,pi/2)
@@ -33,11 +45,11 @@ T07=T06*T67
 T08=T07*T78
 
 print("x: ")
-print(T08[0,3].subs([(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)]))
+print(T08[0,3].subs([(l1,0.4),(l2,0.455),(a1,0.025),(d1,0.035),(l4,0.42),(l5,0.08)]))
 print("y: ")
-print(T08[1,3].subs([(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)]))
+print(T08[1,3].subs([(l1,0.4),(l2,0.455),(a1,0.025),(d1,0.035),(l4,0.42),(l5,0.08)]))
 print("z: ")
-print(T08[2,3].subs([(l1, 0.4), (l2, 0.455), (a1, 0.025), (d1, 0.035), (l4, 0.42), (l5, 0.08)]))
+print(T08[2,3].subs([(l1,0.4),(l2,0.455),(a1,0.025),(d1,0.035),(l4,0.42),(l5,0.08)]))
 
 pub = rospy.Publisher('joint_states', JointState, queue_size=1)
 pos = rospy.Publisher('position', Point, queue_size=1)
@@ -47,8 +59,8 @@ seq = 0
 header.frame_id=''
 joint_msg=JointState()
 
-joint_msg.name = ['joint_a1','joint_a2','joint_a3','joint_a4','joint_a5','joint_a6',]
-angles = [0.0,0.0,0.0,0.0,0.0,0.0,]
+joint_msg.name = ['joint_a1','joint_a2','joint_a3','joint_a4','joint_a5','joint_a6']
+angles = [0.0,0.0,0.0,0.0,0.0,0.0]
 
 def callback(data):
     angles[0]=data.linear.x

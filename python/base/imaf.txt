@@ -1,0 +1,12 @@
+        joint_msg.header = header
+        joint_msg.position = angles
+        pub.publish(joint_msg)
+        seq += 1
+        time.sleep(0.5)    
+def subscriber():
+    rospy.init_node('###node_name###', anonymous=True)
+    rospy.Subscriber("position", Point, callback) 
+    rospy.spin()
+
+if __name__ == '__main__':
+    subscriber()

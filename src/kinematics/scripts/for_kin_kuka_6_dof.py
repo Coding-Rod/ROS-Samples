@@ -30,14 +30,14 @@ def dh_matrix (t,d,a,aph):
 	return T
 
 # Table
-T01=dh_matrix(pi,       l1,     0,      pi)
-T12=dh_matrix(pi+t1,    0,      a1,     pi/2)
-T23=dh_matrix(t2,       0,      l2,     0)
-T34=dh_matrix(t3-pi/2,  0,      d1,     pi/2)
-T45=dh_matrix(t4+pi,    -l4,    0,      pi/2)
-T56=dh_matrix(t5+pi,    0,      0,      pi/2)
-T67=dh_matrix(0,        -l5,    0,      0)
-T78=dh_matrix(t6,       0,      0,      0)
+T01=dh_matrix(pi,l1,0,pi)
+T12=dh_matrix(pi+t1,0,a1,pi/2)
+T23=dh_matrix(t2,0,l2,0)
+T34=dh_matrix(t3-pi/2,0,d1,pi/2)
+T45=dh_matrix(t4+pi,-l4,0,pi/2)
+T56=dh_matrix(t5+pi,0,0,pi/2)
+T67=dh_matrix(0,-l5,0,0)
+T78=dh_matrix(t6,0,0,0)
 
 T02=T01*T12
 T03=T02*T23

@@ -23,4 +23,3 @@ spawn a URDF robot -->
 respawn="false" output="screen"
 args="-urdf -model diff_wheeled_robot -param robot_description"/>
 </launch>
-

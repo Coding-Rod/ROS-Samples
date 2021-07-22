@@ -1,0 +1,8 @@
+prefix=/home/rodri/Documents/imt342_IN_ws/devel
+
+Name: first_test
+Description: Description of first_test
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

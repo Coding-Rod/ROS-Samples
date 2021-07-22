@@ -1,0 +1,8 @@
+prefix=/home/rodri/Documents/imt342_IN_ws/devel
+
+Name: dsr_description
+Description: Description of dsr_description
+Version: 1.2.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

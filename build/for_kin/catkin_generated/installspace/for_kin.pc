@@ -1,0 +1,8 @@
+prefix=/home/rodri/Documents/imt342_IN_ws/install
+
+Name: for_kin
+Description: Description of for_kin
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

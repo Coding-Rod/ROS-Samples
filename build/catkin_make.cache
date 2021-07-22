@@ -1,2 +1,2 @@
-
+diff_robot:dsr_description:first_test:for_kin:fundamentals:kinematics:tensorflow_object_detector:vision_msgs
 -DCATKIN_DEVEL_PREFIX=/home/rodri/Documents/imt342_IN_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rodri/Documents/imt342_IN_ws/install -G Unix Makefiles

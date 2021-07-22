@@ -7,7 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/rodri/Documents/imt342_IN_ws/devel:$CMAKE_PREFIX_PATH"
+export PATH='/opt/ros/melodic/bin:/home/rodri/tensorflow/bin:/home/rodri/.local/bin:/home/rodri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
 export PWD='/home/rodri/Documents/imt342_IN_ws/build'
-export ROSLISP_PACKAGE_DIRECTORIES='/home/rodri/Documents/imt342_IN_ws/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/rodri/Documents/imt342_IN_ws/src:$ROS_PACKAGE_PATH"

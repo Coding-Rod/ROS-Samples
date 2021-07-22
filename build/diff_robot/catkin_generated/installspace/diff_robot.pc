@@ -1,0 +1,8 @@
+prefix=/home/rodri/Documents/imt342_IN_ws/install
+
+Name: diff_robot
+Description: Description of diff_robot
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

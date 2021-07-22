@@ -131,6 +131,14 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/rodri/Documents/imt342_IN_ws/build/gtest/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/dsr_description/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/fundamentals/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/vision_msgs/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/tensorflow_object_detector/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/diff_robot/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/first_test/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/for_kin/cmake_install.cmake")
+  include("/home/rodri/Documents/imt342_IN_ws/build/kinematics/cmake_install.cmake")
 
 endif()
 

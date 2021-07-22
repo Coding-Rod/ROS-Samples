@@ -1,0 +1,8 @@
+prefix=/home/rodri/Documents/imt342_IN_ws/devel
+
+Name: fundamentals
+Description: Description of fundamentals
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

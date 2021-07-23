@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from __future__ import print_function
-
 import roslib
 import sys
 import rospy
@@ -13,7 +12,6 @@ from geometry_msgs.msg import Twist
 from cv_bridge import CvBridge, CvBridgeError
 
 class image_converter:
-
   def __init__(self):
     self.bridge = CvBridge()
     self.image_sub = rospy.Subscriber("diff_robot/camera/image_raw",Image,self.callback) # topic from camera

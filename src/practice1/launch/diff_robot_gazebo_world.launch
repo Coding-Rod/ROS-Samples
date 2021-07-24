@@ -7,7 +7,7 @@ paused:=true -->
 	<arg name="headless" default="false"/>
 	<arg name="debug" default="false"/>
 <!-- We resume the logic in empty_world.launch -->
-	<include file="$(find practice1)/launch/lab3.launch">
+	<include file="$(find practice1)/launch/race1.launch">
 		<arg name="debug" value="$(arg debug)" />
 		<arg name="gui" value="$(arg gui)" />
 		<arg name="paused" value="$(arg paused)"/>

@@ -47,7 +47,7 @@ def callback(data):
   global giro
   global counter
   
-  # Go forward
+  # Rotate
   if state == 0:
     if (yaw < pi/2):
       vel.angular.z = -0.2  
@@ -55,8 +55,8 @@ def callback(data):
       vel.angular.z = 0
       state = 1
 
-  # Rotate
   if state == 1:
+    # Go forward
     if (forward_dist > 0.5 and flag == 0):
       vel.linear.x = 0.25
       last_angle = yaw
@@ -65,7 +65,8 @@ def callback(data):
       vel.linear.x = 0.0
       dif = abs(last_angle - yaw)
       flag = 1
-      
+
+    # Rotate
       if (giro > 0 and dif < pi/2):
         vel.angular.z = 0.2
       elif (giro < 0 and dif < pi/2):
@@ -79,14 +80,14 @@ def callback(data):
 
   # Verify
   if state == 2:
-    print(counter)
     if (red == 1):
       counter += 1
+    print(counter)
     state = 1
   pub.publish(vel)
 
 def listener():
-  rospy.init_node('lab_2', anonymous=True)
+  rospy.init_node('laberint', anonymous=True)
   rospy.Subscriber("odom", Odometry, callback)
   rospy.Subscriber("scan", LaserScan, scan_callback)
   rospy.Subscriber("mask", Int32, mask_callback)

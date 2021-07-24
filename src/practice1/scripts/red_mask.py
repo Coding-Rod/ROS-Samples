@@ -15,9 +15,7 @@ class image_converter:
   def __init__(self):
     self.bridge = CvBridge()
     self.image_sub = rospy.Subscriber("diff_robot/camera/image_raw",Image,self.callback) # topic from camera
-    self.max_value = rospy.Publisher("mask",Int32,self.callback) # topic from camera
-
-
+    self.max_value = rospy.Publisher("mask",Int32,queue_size=1) # topic from camera
 
   def callback(self,data):
     try:
@@ -27,19 +25,20 @@ class image_converter:
     # lower =(80, 0, 0) # lower bound for each channel
     # upper = (250, 80, 80)
     hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
-    lower1 = np.array([0, 101, 21])
+    lower1 = np.array([0, 99, 21])
     upper1 = np.array([10, 254, 253])
     mask = cv2.inRange(hsv, lower1, upper1) # mask = 0_1	
     total = mask[:, 0:639]
     total_mask = np.array([np.sum(total)])
     max_malue = np.max(total_mask)
 
+    self.max_value.publish(0)
     print('max_malue: ', max_malue)
-    if (max_malue >= 1500000 and max_malue <= 15000000):
+    if (max_malue >= 2000000 and max_malue <= 15000000):
       self.max_value.publish(1)
+      cv2.imshow("Filter", mask)
     
-    cv2.imshow("Image window", cv_image)
-    cv2.imshow("Filter", mask)
+    # cv2.imshow("Image window", cv_image)
     cv2.waitKey(3)
 
 def main(args):

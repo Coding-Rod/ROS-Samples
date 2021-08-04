@@ -1,0 +1,14 @@
+material kite_panel
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture kite_panel.png
+      }
+    }
+  }
+}
+

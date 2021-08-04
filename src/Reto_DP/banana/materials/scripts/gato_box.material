@@ -1,0 +1,13 @@
+material banana
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture banana.png
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+material blue_box
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture blue_box.png
+      }
+    }
+  }
+}

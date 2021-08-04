@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/rodri/Documents/imt342_IN_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/rodri/Documents/imt342_IN_ws/src/diff_robot/include/**",
+        "/home/rodri/Documents/imt342_IN_ws/src/practice1/include/**",
+        "/home/rodri/Documents/imt342_IN_ws/src/practice2/include/**",
+        "/home/rodri/Documents/imt342_IN_ws/src/second_test/include/**",
+        "/home/rodri/Documents/imt342_IN_ws/src/turtlebot3/turtlebot3_slam/include/**",
+        "/home/rodri/Documents/imt342_IN_ws/src/vision_msgs/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

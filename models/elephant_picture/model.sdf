@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="elephant_picture">
+    <static>true</static>
+    <link name="box">
+      <pose>0 0 0 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.12 0.025 0.25</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.12 0.025 0.25</size> <!-- tamano caja -->
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://elephant_picture/materials/scripts</uri>
+            <uri>model://elephant_picture/materials/textures</uri>
+            <name>elephant_picture</name>
+          </script>
+        </material>
+      </visual>
+    </link>    
+  </model>
+</sdf>

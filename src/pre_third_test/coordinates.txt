@@ -1,0 +1,14 @@
+# Coordinates
+
+## Instructions
+
+* If blue count bicycles (id = 2)
+* If green count boats (id = 9)
+
+## Coordinates
+
+1. -0,009226 | 1,633696
+2. -3,815827 | 2,016193
+3. -3,653352 | 0,077904
+4. 3,416387  | 0,139295
+5. 3,259183  | 2,058598

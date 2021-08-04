@@ -1,0 +1,14 @@
+material person_picture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture person_picture.png
+      }
+    }
+  }
+}
+

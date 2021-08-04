@@ -1,0 +1,14 @@
+material elephant_picture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture elephant_picture.png
+      }
+    }
+  }
+}
+

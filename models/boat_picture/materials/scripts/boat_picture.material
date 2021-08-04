@@ -1,0 +1,14 @@
+material boat_picture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture boat_picture.png
+      }
+    }
+  }
+}
+

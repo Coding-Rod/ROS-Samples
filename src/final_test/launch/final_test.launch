@@ -1,0 +1,13 @@
+<launch>
+   <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_final_test.launch" />
+   <include file="$(find tensorflow_object_detector)/launch/usb_cam_detector.launch" />
+   <!--once you are able to run navigation-->
+   <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch" >
+   <arg name="map_file" value="$(find final_test)/maps/map.yaml"/>
+   </include>
+   <node name="final_test" pkg="final_test" type="final_test.py" output="screen"/>
+   <!--once you have codified your nodes-->
+   <!--
+   <node name="node2" pkg="third_test" type="sript2.py" output="screen"/>
+   -->
+</launch>

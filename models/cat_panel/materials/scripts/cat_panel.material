@@ -1,0 +1,13 @@
+material cat_panel
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture cat_panel.png
+      }
+    }
+  }
+}

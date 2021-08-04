@@ -1,0 +1,10 @@
+<launch>
+	<!-- <arg name ="model"/> -->
+	<param name= "robot_description" textfile = "$(find package_1)/urdf/robot3.urdf"/>
+	<!-- <param name ="use_gui" value = "true"/>  -->
+       <!-- <node name ="joint_state_publisher" pkg = "joint_state_publisher" type = "joint_state_publisher"/> -->
+
+	<node name ="robot3" pkg = "package_1" type = "robot3.py"/>	
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find package_1)/urdf.rviz" required ="true"/>
+</launch>

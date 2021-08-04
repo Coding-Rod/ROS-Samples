@@ -1,0 +1,13 @@
+material dog_panel
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture dog_panel.png
+      }
+    }
+  }
+}

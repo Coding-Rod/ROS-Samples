@@ -1,0 +1,15 @@
+# Instrucciones y coordenadas
+
+## Instrucciones
+
+* Mediante un input (pizza / cometa)
+* Ir a la sala más próxima y medir la distancia entre objetos
+* Ir a la sala central e imprimir la distancia
+
+## Coordenadas
+
+* Pizza: 2.975734, 1.244423, 1.57079633
+* Der:   5.876358, 2.813194, 1.57079633
+* Kite: -2.898362, 1.234176, 1.57079633
+* Izq:  -5.753002, 2.794272, 1.57079633
+* Ctr:   0.039904, 2.909452, 1.57079633

@@ -1,0 +1,13 @@
+material pizza
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture pizza.png
+      }
+    }
+  }
+}

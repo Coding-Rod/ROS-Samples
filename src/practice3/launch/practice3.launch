@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_practice3.launch"/>
+    <include file="$(find tensorflow_object_detector)/launch/usb_cam_detector.launch"/>
+    <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+        <arg name="map_file" value="$(find practice3)/maps/maps.yaml"/>
+        <arg name="model" value="waffle"/>
+    </include>
+    <node pkg="practice3" type="moves.py" name="moves" output="screen"/>
+</launch>

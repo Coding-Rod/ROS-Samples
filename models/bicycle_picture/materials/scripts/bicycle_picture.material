@@ -1,0 +1,14 @@
+material bicycle_picture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture bicycle_picture.png
+      }
+    }
+  }
+}
+

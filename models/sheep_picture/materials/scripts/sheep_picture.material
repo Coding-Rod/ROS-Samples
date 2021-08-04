@@ -1,0 +1,14 @@
+material sheep_picture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture sheep_picture.png
+      }
+    }
+  }
+}
+

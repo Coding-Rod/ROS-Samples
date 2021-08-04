@@ -1,0 +1,13 @@
+material green_box
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture green_box.png
+      }
+    }
+  }
+}

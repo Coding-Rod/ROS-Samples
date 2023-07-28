@@ -42,29 +42,30 @@ class image_converter:
       cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
     except CvBridgeError as e:
       print(e)
-    lower =(0, 0, 20) # lower bound for each channel
-    upper = (50, 50, 80)
+    lower =(0, 0, 0) # lower bound for each channel
+    upper = (55, 35, 80)
     mask = cv2.inRange(cv_image, lower, upper) # mask = 0_1	
-    right = mask[:, 320:639]
-    left = mask[:, 0:319]
+    right = mask[:, 391:639]
+    center = mask[:, 250:390]
+    left = mask[:, 0:249]
+    if (np.sum(right) >= np.sum(left) and np.sum(right) >= np.sum(center)):
+      vel.angular.z = 0.15
+      print('right', np.sum(right))
+      print("forward: ", forward_dist)
+      
+    if (np.sum(left) > np.sum(right) and np.sum(left) > np.sum(center)):
+      vel.angular.z = -0.15
+      print('left', np.sum(left))
+      print("forward: ", forward_dist)
 
-    prev = vel.angular.z
-    if (np.sum(right) >= np.sum(left)):
-      vel.angular.z = 0.2
-      # print('right', np.sum(right))
-    else:
-      vel.angular.z = -0.2
-      # print('left', np.sum(left))
-    print("prev: " +str(prev))
-    print("vel.angular.z: " +str(vel.angular.z))
-    print("forward_dist: " +str(forward_dist))
-    print("vel.linear.x: " +str(vel.linear.x)+'\n')
-
-    if vel.angular.z != prev:
-      if (forward_dist > 0.5):
-        vel.linear.x = 0.25
+    if (np.sum(center) > np.sum(right) and np.sum(center) > np.sum(left)):
+      if(forward_dist>0.5):
+        vel.linear.x = 0.20
       else:
         vel.linear.x = 0
+        vel.angular.z = 0
+      print("forward: ", forward_dist)
+      print('center', np.sum(center))
 
     
     cv2.imshow("Image window", cv_image)
